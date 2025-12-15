@@ -60,15 +60,11 @@ class Graph:
         return g
 
 
-
 def run_automated_experiments():
-
     sizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-    densities = [0.1, 0.3, 0.5]
+    densities = [0.1, 0.3, 0.5, 0.6, 0.7]
     repeats = 20
-
     results_table = []
-
     print(f"{'Density':<10} | {'Size (N)':<10} | {'Avg Time List (s)':<20} | {'Avg Time Matrix (s)':<20}")
     print("-" * 70)
 
@@ -79,20 +75,16 @@ def run_automated_experiments():
 
             for _ in range(repeats):
                 g_list = Graph.random_graph(n, density, mode='list')
-
                 start = time.time()
                 g_list.main()
                 total_time_list += (time.time() - start)
-
                 g_matrix = Graph.random_graph(n, density, mode='matrix')
-
                 start = time.time()
                 g_matrix.main()
                 total_time_matrix += (time.time() - start)
 
             avg_list = total_time_list / repeats
             avg_matrix = total_time_matrix / repeats
-
             results_table.append({
                 "Density": density,
                 "Size": n,
@@ -101,9 +93,7 @@ def run_automated_experiments():
             })
 
             print(f"{density:<10} | {n:<10} | {avg_list:<20.6f} | {avg_matrix:<20.6f}")
-
     return results_table
-
 
 if __name__ == "__main__":
     data = run_automated_experiments()
